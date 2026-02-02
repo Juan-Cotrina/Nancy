@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impacto de la Tecnología - Juan Cotrina</title>
+    <style>
+        /* --- ESTILOS GENERALES (CSS) --- */
+        :root {
+            --primary-color: #2c3e50; /* Azul oscuro sobrio */
+            --accent-color: #27ae60;  /* Verde esperanza/positivo */
+            --bg-color: #fdfbf7;      /* Blanco hueso, suave a la vista */
+            --text-color: #333333;    /* Gris muy oscuro para lectura */
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8; /* Mayor espaciado para facilitar lectura */
+            margin: 0;
+            padding: 0;
+            font-size: 18px; /* Fuente base grande para +50 años */
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* --- TARJETAS INTERACTIVAS --- */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        @media (min-width: 768px) {
+            .card-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 25px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            border-left: 10px solid var(--accent-color);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            background-color: #fcfcfc;
+        }
+
+        .card-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            display: block;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .problem-text {
+            color: #c0392b; /* Rojo suave para el problema */
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .solution-text {
+            color: var(--accent-color); /* Verde para la solución */
+            font-weight: bold;
+            display: none; /* Oculto inicialmente para efecto didáctico */
+            margin-top: 10px;
+            font-size: 1.1em;
+        }
+
+        .click-instruction {
+            font-size: 0.8em;
+            color: #7f8c8d;
+            text-align: center;
+            margin-top: 15px;
+            font-style: italic;
+        }
+
+        /* --- SECCIÓN LÍNEA DE TIEMPO --- */
+        .timeline {
+            margin: 40px 0;
+            padding-left: 20px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .timeline-item {
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            position: absolute;
+            left: -32px;
+            top: 5px;
+        }
+
+        .year {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: var(--primary-color);
+        }
+
+        /* --- BOTÓN DE ACCIÓN --- */
+        .cta-button {
+            display: block;
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 50px;
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            background-color: #34495e;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+            font-size: 0.9em;
+            border-top: 1px solid #ddd;
+            margin-top: 50px;
+        }
+
+        /* --- MODAL (Ventana emergente) --- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 600px;
+            text-align: center;
+        }
+        .close-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>¿Qué problemas resolvió la tecnología?</h1>
+        <div class="subtitle">Una guía visual para entender el mundo digital</div>
+    </header>
+
+    <div class="container">
+        
+        <p style="text-align: center; font-size: 1.3em; margin-bottom: 40px;">
+            La tecnología no es magia. Es una herramienta creada por humanos para hacernos la vida 
+            <strong>más fácil, más segura y más conectada</strong>.
+        </p>
+
+        <h2>1. Áreas donde la tecnología cambió nuestras vidas</h2>
+        <p>Haga clic en las tarjetas para descubrir la solución tecnológica:</p>
+
+        <div class="card-grid">
+            <div class="card" onclick="revealAnswer(this)">
+                <span class="card-icon">✉️ ➔ 📱</span>
+                <span class="card-title">Comunicación</span>
+                <span class="problem-text">EL PROBLEMA:</span>
+                <span>Esperar semanas para recibir una carta de un familiar lejano.</span>
+                <div class="solution-text">
+                    LA SOLUCIÓN: <br>
+                    <strong>WhatsApp y Videollamadas.</strong><br>
+                    Contacto instantáneo, viéndonos a los ojos, gratis.
+                </div>
+                <div class="click-instruction">(Toque aquí para ver la solución)</div>
+            </div>
+
+            <div class="card" onclick="revealAnswer(this)">
+                <span class="card-icon">📚 ➔ 🔍</span>
+                <span class="card-title">Información</span>
+                <span class="problem-text">EL PROBLEMA:</span>
+                <span>Tener que comprar costosas enciclopedias que se desactualizaban.</span>
+                <div class="solution-text">
+                    LA SOLUCIÓN: <br>
+                    <strong>Google y Wikipedia.</strong><br>
+                    Todo el conocimiento humano en su bolsillo, actualizado al segundo.
+                </div>
+                <div class="click-instruction">(Toque aquí para ver la solución)</div>
+            </div>
+
+            <div class="card" onclick="revealAnswer(this)">
+                <span class="card-icon">🏥 ➔ 🩺</span>
+                <span class="card-title">Salud</span>
+                <span class="problem-text">EL PROBLEMA:</span>
+                <span>Diagnósticos tardíos y cirugías muy invasivas con grandes cicatrices.</span>
+                <div class="solution-text">
+                    LA SOLUCIÓN: <br>
+                    <strong>Imagenología y Telemedicina.</strong><br>
+                    Ver dentro del cuerpo sin operar y consultar al médico desde casa.
+                </div>
+                <div class="click-instruction">(Toque aquí para ver la solución)</div>
+            </div>
+
+            <div class="card" onclick="revealAnswer(this)">
+                <span class="card-icon">🏦 ➔ 💳</span>
+                <span class="card-title">Banca y Trámites</span>
+                <span class="problem-text">EL PROBLEMA:</span>
+                <span>Largas colas de pie, riesgo de robo al llevar efectivo.</span>
+                <div class="solution-text">
+                    LA SOLUCIÓN: <br>
+                    <strong>Banca Móvil (Apps).</strong><br>
+                    Pagar la luz y el agua desde el sofá, con seguridad encriptada.
+                </div>
+                <div class="click-instruction">(Toque aquí para ver la solución)</div>
+            </div>
+        </div>
+
+        <h2>2. Hitos: ¿Cómo llegamos aquí?</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="year">1440 - La Imprenta</div>
+                <div>Antes los libros se copiaban a mano. El conocimiento era solo para ricos. La imprenta lo hizo accesible.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="year">1876 - El Teléfono</div>
+                <div>La voz pudo viajar por cables. Ya no necesitábamos estar en la misma habitación para hablar.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="year">1990 - Internet (La World Wide Web)</div>
+                <div>Las computadoras se conectaron entre sí. El inicio de la "Aldea Global".</div>
+            </div>
+            <div class="timeline-item">
+                <div class="year">2007 - El Smartphone (Teléfono Inteligente)</div>
+                <div>Internet, teléfono, cámara y mapa, todo unido en un dispositivo que cabe en la mano.</div>
+            </div>
+        </div>
+
+        <h2>3. Conclusión Visual</h2>
+        <div style="background-color: #e8f6f3; padding: 30px; border-radius: 10px; text-align: center;">
+            <h3>La tecnología es su aliada</h3>
+            <p>No se trata de saber programar, se trata de perder el miedo a tocar la pantalla.</p>
+            <div style="font-size: 4em;">🤝</div>
+        </div>
+
+        <button class="cta-button" onclick="showWelcome()">¡Estoy listo para aprender más!</button>
+
+    </div>
+
+    <div id="welcomeModal" class="modal">
+        <div class="modal-content">
+            <h2 style="color:var(--accent-color)">¡Excelente actitud!</h2>
+            <p style="font-size: 1.2em;">Bienvenido a esta nueva etapa. <br>Recuerde: Nadie nació sabiendo, y nunca es tarde para conectar.</p>
+            <button class="close-btn" onclick="closeModal()">Cerrar</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>Autor: <strong>Juan Cotrina</strong></p>
+        <p>Material didáctico para el curso de Alfabetización Digital.</p>
+        <p>&copy; 2026 Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // --- JAVASCRIPT (Lógica) ---
+
+        // Función para voltear las tarjetas y mostrar la solución
+        function revealAnswer(element) {
+            // Buscamos el elemento con la clase 'solution-text' dentro de la tarjeta clickeada
+            const solution = element.querySelector('.solution-text');
+            const instruction = element.querySelector('.click-instruction');
+            
+            // Si está oculto, lo mostramos con una animación simple
+            if (solution.style.display === 'none' || solution.style.display === '') {
+                solution.style.display = 'block';
+                solution.style.backgroundColor = '#eafaf1'; // Fondo verde claro
+                solution.style.padding = '10px';
+                solution.style.borderRadius = '5px';
+                instruction.style.display = 'none'; // Ocultamos la instrucción
+            }
+        }
+
+        // Funciones para el Modal
+        function showWelcome() {
+            document.getElementById('welcomeModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('welcomeModal').style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>
