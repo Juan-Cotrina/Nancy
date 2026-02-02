@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Mitos de la Tecnología - Juan Cotrina</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #e74c3c;
+            --secondary: #3498db;
+            --light: #ecf0f1;
+            --text: #333;
+            --gradient: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+
+        /* Tipografía */
+        h1, h2, h3 { margin: 0; }
+        h1 { font-size: 3rem; margin-bottom: 10px; }
+        h2 { font-size: 2rem; color: var(--primary); margin-bottom: 30px; text-align: center; text-transform: uppercase; letter-spacing: 1px; }
+        
+        /* Layout de Slides */
+        section {
+            padding: 60px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* Portada */
+        #intro {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);
+        }
+
+        /* Estilos de Tarjetas (Grupo 1) */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            border-top: 5px solid var(--secondary);
+        }
+        .card:hover { transform: translateY(-5px); }
+        .icon { font-size: 2.5rem; display: block; margin-bottom: 15px; }
+        .myth-title { color: var(--accent); font-weight: bold; font-size: 1.1rem; }
+        .reality { margin-top: 10px; font-size: 0.95rem; color: #555; }
+
+        /* Estilos de Lista (Grupo 2) */
+        .list-container { max-width: 900px; width: 100%; }
+        .myth-item {
+            background: white;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .number {
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* Estilos Visuales (Grupo 3) */
+        .big-myth {
+            text-align: center;
+            max-width: 800px;
+            margin-bottom: 50px;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <section id="intro">
+        <h1>Lo que <span style="color:var(--accent)">NO</span> es la Tecnología</h1>
+        <p style="font-size: 1.5rem;">10 Mitos Comunes en la Era Digital</p>
+        <p style="margin-top: 20px; opacity: 0.8;">Presentación Académica | Autor: Juan Cotrina</p>
+    </section>
+
+    <section id="grupo1">
+        <h2>I. Mitos de Definición (¿Qué es?)</h2>
+        <div class="grid-3">
+            <div class="card">
+                <span class="icon">📱</span>
+                <div class="myth-title">MITO 1: Solo son "aparatos"</div>
+                <p>Creer que tecnología es igual a hardware digital.</p>
+                <div class="reality"><strong>Realidad:</strong> Es conocimiento aplicado. Una ley, una receta o el lenguaje también son tecnologías.</div>
+            </div>
+            <div class="card">
+                <span class="icon">☁️</span>
+                <div class="myth-title">MITO 2: Es inmaterial</div>
+                <p>Creer que "La Nube" es etérea y mágica.</p>
+                <div class="reality"><strong>Realidad:</strong> Son infraestructuras pesadas, cables submarinos y consumo masivo de agua y energía.</div>
+            </div>
+            <div class="card">
+                <span class="icon">🏺</span>
+                <div class="myth-title">MITO 3: Lo viejo no es tecno</div>
+                <p>Creer que solo lo último cuenta.</p>
+                <div class="reality"><strong>Realidad:</strong> La rueda y la escritura siguen siendo nuestras tecnologías más transformadoras.</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="grupo2" style="background-color: #f0f4f8;">
+        <h2>II. Mitos de Interacción (¿Cómo nos afecta?)</h2>
+        <div class="list-container">
+            <div class="myth-item">
+                <div class="number">4</div>
+                <div>
+                    <h3>El Mito de la Neutralidad</h3>
+                    <p><em>"La tecnología no es buena ni mala, depende del uso."</em></p>
+                    <p><strong>🚫 Falso:</strong> Cada diseño tiene una intención política y comercial (sesgos) desde su creación.</p>
+                </div>
+            </div>
+            <div class="myth-item">
+                <div class="number">5</div>
+                <div>
+                    <h3>El Solucionismo Tecnológico</h3>
+                    <p><em>"Hay una app para arreglar cualquier problema social."</em></p>
+                    <p><strong>🚫 Falso:</strong> La tecnología no arregla problemas estructurales (pobreza, educación) por sí sola.</p>
+                </div>
+            </div>
+            <div class="myth-item">
+                <div class="number">6</div>
+                <div>
+                    <h3>El Determinismo</h3>
+                    <p><em>"El avance tecnológico es inevitable e imparable."</em></p>
+                    <p><strong>🚫 Falso:</strong> Las sociedades pueden y deben regular qué tecnologías aceptan o rechazan.</p>
+                </div>
+            </div>
+            <div class="myth-item">
+                <div class="number">7</div>
+                <div>
+                    <h3>El Mito del Aislamiento</h3>
+                    <p><em>"La tecnología nos desconecta de la realidad."</em></p>
+                    <p><strong>🚫 Falso:</strong> Cambia <em>cómo</em> nos conectamos, creando nuevas formas de realidad social.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="grupo3">
+        <h2>III. Mitos sobre el Futuro y Naturaleza</h2>
+        
+        <div class="big-myth">
+            <span class="icon">📈</span>
+            <h3>MITO 8: Progreso Lineal</h3>
+            <p>La idea de que <em>"Nuevo siempre significa Mejor"</em>.</p>
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+            <p><strong>Análisis:</strong> Muchas tecnologías nuevas son menos eficientes o duraderas que las anteriores (ej. obsolescencia programada).</p>
+        </div>
+
+        <div class="grid-3">
+            <div class="card" style="border-top-color: var(--accent);">
+                <span class="icon">🧠</span>
+                <div class="myth-title">MITO 9: La IA es humana</div>
+                <p>Creer que la IA "piensa" o tiene consciencia.</p>
+                <div class="reality">Solo es estadística avanzada y predicción de patrones, no comprensión.</div>
+            </div>
+            <div class="card" style="border-top-color: var(--accent);">
+                <span class="icon">🌱</span>
+                <div class="myth-title">MITO 10: Es Ecológica</div>
+                <p>Creer que lo digital salva árboles.</p>
+                <div class="reality">La basura electrónica (e-waste) es el flujo de desechos que más crece en el mundo.</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Juan Cotrina - Presentación Académica</p>
+    </footer>
+
+</body>
+</html>
