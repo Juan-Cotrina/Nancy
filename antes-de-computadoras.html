@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Mundo Antes de las Computadoras</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lora:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f4f1ea;
+            --card-bg: #ffffff;
+            --accent-color: #8b5e3c;
+            --text-color: #2c2c2c;
+            --header-font: 'Playfair Display', serif;
+            --body-font: 'Lora', serif;
+            --retro-font: 'Special Elite', system-ui;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--body-font);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            font-family: var(--header-font);
+            font-size: 3rem;
+            margin: 0;
+            color: var(--accent-color);
+        }
+
+        .intro-text {
+            font-family: var(--retro-font);
+            font-size: 1.2rem;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            border-left: 5px solid var(--accent-color);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            font-family: var(--header-font);
+            color: var(--accent-color);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        li::before {
+            content: "•";
+            color: var(--accent-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        footer {
+            margin-top: 60px;
+            text-align: center;
+            padding: 40px;
+            background: #e9e4d9;
+            border-radius: 8px;
+            font-style: italic;
+            font-size: 1.2rem;
+            border: 1px dashed var(--accent-color);
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>El mundo antes de las computadoras</h1>
+        <p class="intro-text">Una mirada a la era de la paciencia y el papel</p>
+    </header>
+
+    <div class="grid">
+        <section class="card">
+            <h2>Comunicación</h2>
+            <ul>
+                <li>Cartas escritas a mano, telegramas y teléfonos fijos.</li>
+                <li>Las noticias llegaban por periódicos, radio y televisión.</li>
+                <li>Comunicarse a larga distancia tomaba días o semanas.</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>Trabajo y oficinas</h2>
+            <ul>
+                <li>Máquinas de escribir para documentos.</li>
+                <li>Archivos físicos en carpetas y gabinetes.</li>
+                <li>Cálculos con reglas de cálculo, ábacos o calculadoras mecánicas.</li>
+                <li>Contabilidad manual en libros de registros.</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>Información y conocimiento</h2>
+            <ul>
+                <li>Bibliotecas como fuente principal de información.</li>
+                <li>Enciclopedias impresas (como Britannica).</li>
+                <li>Investigar requería visitar lugares físicamente.</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>Entretenimiento</h2>
+            <ul>
+                <li>Cine, teatro, radio y TV en horarios fijos.</li>
+                <li>Juegos de mesa, lectura y actividades al aire libre.</li>
+                <li>Música en discos de vinilo o casetes.</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>Comercio y banca</h2>
+            <ul>
+                <li>Transacciones en efectivo o cheques.</li>
+                <li>Colas en bancos para cualquier operación.</li>
+                <li>Catálogos impresos para compras por correo.</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>Vida cotidiana</h2>
+            <ul>
+                <li>Mapas de papel para navegar.</li>
+                <li>Fotos reveladas en laboratorios (días de espera).</li>
+                <li>Recetas y conocimientos transmitidos oralmente o en libros.</li>
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <p>"Era un mundo más lento, con mayor interacción presencial, donde la paciencia y la planificación eran esenciales."</p>
+    </footer>
+</div>
+
+</body>
+</html>
