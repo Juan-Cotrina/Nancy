@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Era Digital: Guía Paso a Paso</title>
+    <!-- Iconos para apoyo visual -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Tipografías legibles y modernas -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CONFIGURACIÓN GENERAL --- */
+        :root {
+            --bg-color: #fdfbf7; /* Crema suave */
+            --text-color: #2c3e50; /* Azul oscuro casi negro */
+            --accent-color: #d35400; /* Naranja ladrillo para destacar */
+            --secondary-color: #3498db; /* Azul para elementos informativos */
+            --card-bg: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow: hidden; /* Evitar scroll, es una presentación */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Merriweather', serif;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- CONTENEDOR DE LA PRESENTACIÓN --- */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transform: translateX(50px); /* Efecto de entrada */
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            display: flex; /* Flexbox para centrar contenido */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 10%;
+            pointer-events: none; /* Evitar clicks en slides ocultos */
+            z-index: 1;
+            background-color: var(--bg-color);
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: all;
+            z-index: 2;
+        }
+
+        /* --- ESTILOS DE CONTENIDO --- */
+        .content-wrapper {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            gap: 40px;
+            align-items: center;
+        }
+
+        /* Slide 1: Título */
+        .title-slide h1 {
+            font-size: 4.5rem;
+            color: var(--accent-color);
+        }
+        .title-slide .subtitle {
+            font-size: 1.8rem;
+            color: #7f8c8d;
+            border-top: 2px solid var(--secondary-color);
+            padding-top: 20px;
+            display: inline-block;
+        }
+
+        /* Layout Dos Columnas */
+        .two-columns {
+            grid-template-columns: 1fr 1fr;
+        }
+        
+        @media (max-width: 900px) {
+            .two-columns { grid-template-columns: 1fr; text-align: center; }
+            .title-slide h1 { font-size: 3rem; }
+        }
+
+        /* Tarjetas de Comparación (Antes vs Ahora) */
+        .comparison-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--secondary-color);
+        }
+        .comparison-title {
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .comparison-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+        .arrow-icon {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--accent-color);
+        }
+
+        /* Línea de Tiempo Vertical */
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 40px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #bdc3c7;
+            z-index: -1;
+        }
+        .milestone {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            width: 22%;
+            text-align: center;
+            position: relative;
+        }
+        .milestone::after { /* Punto en la línea */
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            bottom: -40px; /* Ajuste visual */
+            left: 50%;
+            transform: translateX(-50%);
+            display: none; /* Oculto en diseño flex simple, se puede activar */
+        }
+        .year {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* Grilla de Iconos (Usos prácticos) */
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .icon-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+        .icon-card:hover {
+            transform: translateY(-10px);
+        }
+        .icon-card i {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        /* Analogía Nube */
+        .cloud-concept {
+            text-align: center;
+            padding: 40px;
+            background: #eaf2f8;
+            border-radius: 20px;
+        }
+
+        /* --- CONTROLES DE NAVEGACIÓN --- */
+        .controls {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+            display: flex;
+            gap: 20px;
+            z-index: 10;
+        }
+
+        .btn {
+            background-color: var(--text-color);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-color);
+        }
+
+        .btn:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 5px;
+            background: var(--accent-color);
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 30px;
+            left: 40px;
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            font-family: 'Merriweather', serif;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="slider-container">
+        
+        <!-- Barra de Progreso -->
+        <div class="progress-bar" id="progress"></div>
+
+        <!-- Indicador de Slide -->
+        <div class="slide-number" id="slide-number">1 / 8</div>
+
+        <!-- SLIDE 1: INTRODUCCIÓN -->
+        <div class="slide active title-slide">
+            <div class="content-wrapper" style="text-align: center; display: block;">
+                <i class="fa-solid fa-earth-americas" style="font-size: 5rem; color: var(--secondary-color); margin-bottom: 20px;"></i>
+                <h1>La Era Digital</h1>
+                <div class="subtitle">Una guía visual para entender el mundo de hoy sin miedo</div>
+                <p style="margin-top: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Bienvenidos. Esta presentación está diseñada para explicarle, paso a paso, cómo hemos cambiado del papel a la pantalla y cómo puede aprovecharlo.
+                </p>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: DEFINICIÓN (GAP DIGITAL) -->
+        <div class="slide">
+            <div class="content-wrapper two-columns">
+                <div>
+                    <h2>¿Qué es la "Era Digital"?</h2>
+                    <p>No es magia, es <strong>evolución</strong>. </p>
+                    <p>Antiguamente, la información vivía en soportes físicos (piedra, papel, casetes). Hoy, esa misma información se convierte en "código" (ceros y unos) que viaja a la velocidad de la luz.</p>
+                    <div style="background: #fff3cd; padding: 20px; border-radius: 10px; border-left: 5px solid #ffc107;">
+                        <p style="margin:0; font-weight: bold; font-size: 1rem;">💡 Piense en esto:</p>
+                        <p style="margin:0; font-size: 1rem;">Es como pasar de enviar una carta por diligencia (lenta y física) a enviarla por un tubo neumático instantáneo.</p>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <i class="fa-solid fa-microchip" style="font-size: 12rem; opacity: 0.1; position: absolute; right: 10%; top: 20%;"></i>
+                    <img src="https://placehold.co/500x400/3498db/ffffff?text=Evolución" alt="Gráfico decorativo" style="max-width: 100%; border-radius: 20px; box-shadow: var(--shadow);">
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: ANALOGÍA (ANTES VS AHORA) -->
+        <div class="slide">
+            <h2 style="text-align: center; width: 100%;">Traduciendo el Mundo</h2>
+            <p style="text-align: center; margin-bottom: 40px;">Conceptos antiguos vs. Conceptos digitales</p>
+            
+            <div class="content-wrapper">
+                <!-- Fila 1 -->
+                <div class="content-wrapper" style="grid-template-columns: 1fr auto 1fr; gap: 20px;">
+                    <div class="comparison-card">
+                        <div class="comparison-title">MUNDO FÍSICO</div>
+                        <div class="comparison-value"><i class="fa-solid fa-envelope"></i> Carta manuscrita</div>
+                        <p style="font-size: 0.9rem; margin: 5px 0 0;">Tarda días en llegar.</p>
+                    </div>
+                    <div class="arrow-icon"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="comparison-card">
+                        <div class="comparison-title">MUNDO DIGITAL</div>
+                        <div class="comparison-value"><i class="fa-solid fa-at"></i> Email</div>
+                        <p style="font-size: 0.9rem; margin: 5px 0 0;">Llega en segundos. Gratis.</p>
+                    </div>
+                </div>
+
+                <!-- Fila 2 -->
+                <div class="content-wrapper" style="grid-template-columns: 1fr auto 1fr; gap: 20px;">
+                    <div class="comparison-card">
+                        <div class="comparison-title">MUNDO FÍSICO</div>
+                        <div class="comparison-value"><i class="fa-solid fa-book"></i> Biblioteca</div>
+                        <p style="font-size: 0.9rem; margin: 5px 0 0;">Hay que ir y buscar en ficheros.</p>
+                    </div>
+                    <div class="arrow-icon"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="comparison-card">
+                        <div class="comparison-title">MUNDO DIGITAL</div>
+                        <div class="comparison-value"><i class="fa-brands fa-google"></i> Google</div>
+                        <p style="font-size: 0.9rem; margin: 5px 0 0;">Toda la información humana aquí.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: HISTORIA -->
+        <div class="slide">
+            <h2 style="text-align: center;">Breve Historia: ¿Cómo llegamos aquí?</h2>
+            <div class="content-wrapper" style="display: block;">
+                <div class="timeline">
+                    <div class="milestone">
+                        <span class="year">1980s</span>
+                        <i class="fa-solid fa-computer" style="font-size: 2rem; margin-bottom: 10px; color: #7f8c8d;"></i>
+                        <h4 style="margin-bottom: 10px;">La PC Personal</h4>
+                        <p style="font-size: 0.9rem;">Las computadoras entran a las casas. Eran "máquinas de escribir con pantalla".</p>
+                    </div>
+                    <div class="milestone">
+                        <span class="year">1990s</span>
+                        <i class="fa-solid fa-globe" style="font-size: 2rem; margin-bottom: 10px; color: #7f8c8d;"></i>
+                        <h4 style="margin-bottom: 10px;">World Wide Web</h4>
+                        <p style="font-size: 0.9rem;">El mundo se conecta. Nacen las páginas web y el correo electrónico masivo.</p>
+                    </div>
+                    <div class="milestone">
+                        <span class="year">2007</span>
+                        <i class="fa-solid fa-mobile-screen" style="font-size: 2rem; margin-bottom: 10px; color: #7f8c8d;"></i>
+                        <h4 style="margin-bottom: 10px;">El Smartphone</h4>
+                        <p style="font-size: 0.9rem;">Internet entra en el bolsillo. La cámara, el mapa y el banco en un solo aparato.</p>
+                    </div>
+                    <div class="milestone">
+                        <span class="year">HOY</span>
+                        <i class="fa-solid fa-robot" style="font-size: 2rem; margin-bottom: 10px; color: #7f8c8d;"></i>
+                        <h4 style="margin-bottom: 10px;">Inteligencia Artificial</h4>
+                        <p style="font-size: 0.9rem;">Las máquinas aprenden y nos ayudan a escribir, crear y analizar.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 5: CONCEPTOS CLAVE -->
+        <div class="slide">
+            <div class="content-wrapper two-columns">
+                <div>
+                    <h2>Diccionario de Supervivencia</h2>
+                    <p>Tres palabras que escuchará siempre:</p>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 20px; font-size: 1.1rem;">
+                            <i class="fa-solid fa-cloud" style="color: var(--secondary-color); width: 30px;"></i> <strong>La Nube:</strong> No está en el cielo. Son computadoras gigantes muy seguras donde se guardan sus fotos y datos para que no se pierdan si se le rompe el teléfono.
+                        </li>
+                        <li style="margin-bottom: 20px; font-size: 1.1rem;">
+                            <i class="fa-solid fa-mobile-button" style="color: var(--secondary-color); width: 30px;"></i> <strong>App (Aplicación):</strong> Es simplemente un "programa" o herramienta diseñada para hacer una sola cosa (como una calculadora o una agenda).
+                        </li>
+                        <li style="margin-bottom: 20px; font-size: 1.1rem;">
+                            <i class="fa-solid fa-wifi" style="color: var(--secondary-color); width: 30px;"></i> <strong>Wi-Fi:</strong> Internet invisible por aire. Como una radio, pero de datos.
+                        </li>
+                    </ul>
+                </div>
+                <div class="cloud-concept">
+                    <i class="fa-solid fa-cloud" style="font-size: 8rem; color: white; text-shadow: 0 10px 20px rgba(0,0,0,0.1);"></i>
+                    <h3 style="margin-top: 20px;">"La Nube" = Almacén Seguro Remoto</h3>
+                    <p style="font-size: 0.9rem;">Si su teléfono cae al agua, sus fotos siguen vivas en la nube.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 6: BENEFICIOS PRÁCTICOS -->
+        <div class="slide">
+            <h2 style="text-align: center; margin-bottom: 40px;">¿Para qué me sirve esto hoy?</h2>
+            <div class="content-wrapper icon-grid">
+                <div class="icon-card">
+                    <i class="fa-solid fa-video"></i>
+                    <h3>Conexión Familiar</h3>
+                    <p style="font-size: 0.9rem;">Videollamadas gratuitas con nietos o hijos que viven lejos. Verlos en tiempo real.</p>
+                </div>
+                <div class="icon-card">
+                    <i class="fa-solid fa-notes-medical"></i>
+                    <h3>Salud</h3>
+                    <p style="font-size: 0.9rem;">Pedir citas médicas por el celular, recibir resultados de exámenes sin ir al hospital.</p>
+                </div>
+                <div class="icon-card">
+                    <i class="fa-solid fa-landmark"></i>
+                    <h3>Trámites</h3>
+                    <p style="font-size: 0.9rem;">Pagar la luz o el banco desde el sofá. Evitar filas largas y cansancio.</p>
+                </div>
+                <div class="icon-card">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    <h3>No perderse</h3>
+                    <p style="font-size: 0.9rem;">El GPS le dice dónde está y cómo llegar a cualquier sitio, caminando o en auto.</p>
+                </div>
+                <div class="icon-card">
+                    <i class="fa-solid fa-film"></i>
+                    <h3>Entretenimiento</h3>
+                    <p style="font-size: 0.9rem;">Películas antiguas, música de su juventud, documentales. Todo a la carta.</p>
+                </div>
+                <div class="icon-card">
+                    <i class="fa-brands fa-youtube"></i>
+                    <h3>Aprender</h3>
+                    <p style="font-size: 0.9rem;">¿Cómo arreglar una llave? ¿Cómo tejer? En YouTube hay tutoriales para todo.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 7: SEGURIDAD -->
+        <div class="slide">
+            <div class="content-wrapper two-columns">
+                <div style="text-align: center;">
+                     <i class="fa-solid fa-shield-halved" style="font-size: 10rem; color: var(--accent-color);"></i>
+                </div>
+                <div>
+                    <h2>Mitos y Seguridad</h2>
+                    <blockquote>
+                        "La seguridad digital es como cruzar la calle: no dejamos de cruzar, solo miramos a ambos lados."
+                    </blockquote>
+                    <h3 style="margin-top: 30px;">Reglas de Oro:</h3>
+                    <ul style="margin-left: 20px;">
+                        <li><strong>Contraseñas:</strong> Son como las llaves de casa. No se las dé a extraños.</li>
+                        <li><strong>El Banco:</strong> Su banco NUNCA le pedirá su clave por correo o teléfono.</li>
+                        <li><strong>Sin Miedo:</strong> Es muy difícil "romper" un computador o celular tocando botones. Explore con confianza.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 8: CONCLUSIÓN -->
+        <div class="slide">
+            <div class="content-wrapper" style="text-align: center; display: block;">
+                <h1 style="color: var(--secondary-color);">Nunca es tarde</h1>
+                <p style="font-size: 1.5rem;">La tecnología no es para los jóvenes.<br>Es para los curiosos.</p>
+                <div style="margin-top: 50px;">
+                    <i class="fa-solid fa-graduation-cap" style="font-size: 4rem; color: var(--text-color); margin-bottom: 20px;"></i>
+                    <p>¡Gracias por dar el primer paso!</p>
+                </div>
+                <button class="btn" onclick="location.reload()" style="margin: 40px auto; background-color: var(--secondary-color);">
+                    <i class="fa-solid fa-rotate-right"></i> Volver al inicio
+                </button>
+            </div>
+        </div>
+
+        <!-- CONTROLES -->
+        <div class="controls">
+            <button class="btn" id="prevBtn" disabled><i class="fa-solid fa-chevron-left"></i> Anterior</button>
+            <button class="btn" id="nextBtn">Siguiente <i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+
+    </div>
+
+    <script>
+        // Lógica de la presentación
+        const slides = document.querySelectorAll('.slide');
+        const nextBtn = document.getElementById('nextBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const progressBar = document.getElementById('progress');
+        const slideNumber = document.getElementById('slide-number');
+        
+        let currentSlide = 0;
+
+        function updateSlide() {
+            // Quitar clase active de todos
+            slides.forEach(slide => slide.classList.remove('active'));
+            // Poner clase active al actual
+            slides[currentSlide].classList.add('active');
+
+            // Actualizar botones
+            prevBtn.disabled = currentSlide === 0;
+            if (currentSlide === slides.length - 1) {
+                nextBtn.innerHTML = 'Finalizar <i class="fa-solid fa-check"></i>';
+                // nextBtn.disabled = true; // Opcional: deshabilitar al final
+            } else {
+                nextBtn.innerHTML = 'Siguiente <i class="fa-solid fa-chevron-right"></i>';
+                nextBtn.disabled = false;
+            }
+
+            // Actualizar barra de progreso
+            const progress = ((currentSlide + 1) / slides.length) * 100;
+            progressBar.style.width = `${progress}%`;
+
+            // Actualizar número
+            slideNumber.textContent = `${currentSlide + 1} / ${slides.length}`;
+        }
+
+        // Event Listeners Botones
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateSlide();
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlide();
+            }
+        });
+
+        // Event Listeners Teclado
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                if (currentSlide < slides.length - 1) {
+                    currentSlide++;
+                    updateSlide();
+                }
+            } else if (e.key === 'ArrowLeft') {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    updateSlide();
+                }
+            }
+        });
+
+        // Inicializar
+        updateSlide();
+    </script>
+</body>
+</html>
